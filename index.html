@@ -680,6 +680,14 @@
         color: var(--burgundy-deep);
         letter-spacing: -0.01em;
     }
+    .media-card-player {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        margin-top: 16px;
+        border: 0;
+        border-radius: var(--r-sm);
+        display: block;
+    }
     .media-card-link {
         display: inline-flex;
         align-items: center;
@@ -1067,6 +1075,7 @@
         <div class="media-card reveal">
             <h5 data-i18n="media2_label">🎵 Что слушаю</h5>
             <p>boa</p>
+            <iframe class="media-card-player" src="https://www.youtube.com/embed/Uoox9fpmDP0" title="boa" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             <a class="media-card-link" data-i18n="media2_link" href="https://www.youtube.com/watch?v=Uoox9fpmDP0" target="_blank" rel="noopener noreferrer">Слушать boa →</a>
         </div>
     </div>
