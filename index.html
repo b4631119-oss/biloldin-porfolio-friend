@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Biloldin — English portfolio. Learning English to build the future.">
+<meta name="theme-color" content="#FAF6F3">
+<title>Biloldin — English Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --burgundy: #6B1F2E;
+        --burgundy-deep: #4A1420;
+        --accent: #C41E3A;
+        --cream: #F5EFE9;
+        --cream-2: #FAF6F3;
+        --cream-dark: #EAE1D8;
+        --text: #1a1214;
+        --text-muted: #7a6d70;
+        --white: #ffffff;
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(255, 255, 255, 0.8);
+        --shadow-sm: 0 2px 8px rgba(107, 31, 46, 0.06);
+        --shadow-md: 0 8px 24px rgba(107, 31, 46, 0.08);
+        --shadow-lg: 0 16px 48px rgba(107, 31, 46, 0.12);
+        --r-sm: 14px;
+        --r-md: 20px;
+        --r-lg: 28px;
+        --r-xl: 36px;
+        --safe-top: env(safe-area-inset-top, 0px);
+        --safe-bottom: env(safe-area-inset-bottom, 0px);
+        --nav-h: 76px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        background: var(--cream-2);
+        color: var(--text);
+        line-height: 1.55;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        letter-spacing: -0.01em;
+        padding-bottom: calc(var(--nav-h) + var(--safe-bottom) + 12px);
+    }
+
+    /* ============================================================
+       ВЕРХНЯЯ НАВИГАЦИЯ (Desktop)
+    ============================================================ */
+    .desktop-nav {
+        position: fixed;
+        top: calc(16px + var(--safe-top));
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 8px 8px 20px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid var(--glass-border);
+        border-radius: 100px;
+        box-shadow: var(--shadow-md);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .desktop-nav .brand {
+        font-family: 'Fraunces', serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--burgundy);
+        padding-right: 16px;
+        border-right: 1px solid rgba(107, 31, 46, 0.1);
+        margin-right: 4px;
+    }
+    .desktop-nav .brand span { color: var(--accent); }
+
+    .desktop-nav .nav-links { display: flex; gap: 2px; }
+
+    .desktop-nav .nav-links a {
+        padding: 9px 16px;
+        border-radius: 100px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: all 0.25s ease;
+        white-space: nowrap;
+    }
+    .desktop-nav .nav-links a:hover {
+        background: rgba(107, 31, 46, 0.06);
+        color: var(--burgundy);
+    }
+    .desktop-nav .nav-links a.active {
+        background: var(--burgundy);
+        color: var(--white);
+        box-shadow: 0 4px 12px rgba(107, 31, 46, 0.25);
+    }
+
+    /* Общий стиль переключателя языков */
+    .lang-switch {
+        position: relative;
+        display: flex;
+        background: rgba(107, 31, 46, 0.07);
+        border-radius: 100px;
+        padding: 3px;
+        margin-left: 4px;
+    }
+    .lang-switch .slider {
+        position: absolute;
+        top: 3px; left: 3px;
+        width: calc(33.333% - 2px);
+        height: calc(100% - 6px);
+        background: var(--white);
+        border-radius: 100px;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 2px 6px rgba(107, 31, 46, 0.15);
+    }
+    .lang-switch[data-active="en"] .slider { transform: translateX(calc(100% + 1px)); }
+    .lang-switch[data-active="ky"] .slider { transform: translateX(calc(200% + 2px)); }
+
+    .lang-btn {
+        position: relative;
+        z-index: 1;
+        padding: 7px 11px;
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        color: var(--text-muted);
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        border-radius: 100px;
+        min-width: 34px;
+        transition: color 0.3s;
+    }
+    .lang-switch[data-active="ru"] .lang-btn[data-lang="ru"],
+    .lang-switch[data-active="en"] .lang-btn[data-lang="en"],
+    .lang-switch[data-active="ky"] .lang-btn[data-lang="ky"] {
+        color: var(--burgundy);
+    }
+
+    @media (max-width: 900px) {
+        .desktop-nav { display: none; }
+    }
+
+    /* ============================================================
+       ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ ДЛЯ МОБИЛКИ — плавающая пилюля
+    ============================================================ */
+    .lang-switch-mobile {
+        position: fixed;
+        top: calc(14px + var(--safe-top));
+        right: 14px;
+        z-index: 110;
+        display: none;
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid var(--glass-border);
+        border-radius: 100px;
+        padding: 4px;
+        box-shadow: 0 8px 24px rgba(107, 31, 46, 0.12);
+        margin-left: 0;
+    }
+
+    .lang-switch-mobile .slider {
+        top: 4px;
+        left: 4px;
+        width: calc(33.333% - 2.66px);
+        height: calc(100% - 8px);
+        background: var(--burgundy);
+        box-shadow: 0 4px 10px rgba(107, 31, 46, 0.3);
+    }
+
+    .lang-switch-mobile .lang-btn {
+        padding: 8px 11px;
+        font-size: 11.5px;
+        min-width: 36px;
+        color: var(--text-muted);
+    }
+
+    .lang-switch-mobile[data-active="ru"] .lang-btn[data-lang="ru"],
+    .lang-switch-mobile[data-active="en"] .lang-btn[data-lang="en"],
+    .lang-switch-mobile[data-active="ky"] .lang-btn[data-lang="ky"] {
+        color: var(--white);
+    }
+
+    @media (max-width: 900px) {
+        .lang-switch-mobile { display: flex; }
+    }
+
+    /* ============================================================
+       BOTTOM TAB BAR (Mobile)
+    ============================================================ */
+    .bottom-nav {
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: calc(12px + var(--safe-bottom));
+        z-index: 100;
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 6px;
+        background: rgba(255, 255, 255, 0.72);
+        backdrop-filter: blur(28px) saturate(180%);
+        -webkit-backdrop-filter: blur(28px) saturate(180%);
+        border: 1px solid var(--glass-border);
+        border-radius: 26px;
+        box-shadow: 0 12px 40px rgba(107, 31, 46, 0.16), 0 2px 8px rgba(107, 31, 46, 0.06);
+    }
+
+    .bottom-nav a {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        padding: 8px 4px;
+        border-radius: 18px;
+        text-decoration: none;
+        color: var(--text-muted);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        min-height: 52px;
+        justify-content: center;
+    }
+
+    .bottom-nav a svg {
+        width: 22px;
+        height: 22px;
+        stroke-width: 1.8;
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .bottom-nav a span {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        opacity: 0.9;
+    }
+
+    .bottom-nav a.active {
+        color: var(--burgundy);
+        background: rgba(107, 31, 46, 0.08);
+    }
+
+    .bottom-nav a.active svg { transform: scale(1.1); }
+    .bottom-nav a:active svg { transform: scale(0.9); }
+
+    @media (max-width: 900px) {
+        .bottom-nav { display: flex; }
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: calc(100px + var(--safe-top)) 24px 100px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: -30%; right: -30%;
+        width: 80%; height: 90%;
+        background: radial-gradient(circle, rgba(196, 30, 58, 0.12) 0%, transparent 60%);
+        z-index: 0;
+        pointer-events: none;
+        filter: blur(40px);
+    }
+    .hero::after {
+        content: '';
+        position: absolute;
+        bottom: -30%; left: -20%;
+        width: 60%; height: 60%;
+        background: radial-gradient(circle, rgba(107, 31, 46, 0.08) 0%, transparent 60%);
+        z-index: 0;
+        pointer-events: none;
+        filter: blur(40px);
+    }
+
+    .hero-content {
+        max-width: 900px;
+        margin: 0 auto;
+        width: 100%;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
+        color: var(--burgundy);
+        border-radius: 100px;
+        font-size: 13px;
+        font-weight: 500;
+        margin-bottom: 28px;
+        box-shadow: var(--shadow-sm);
+    }
+    .hero-tag::before {
+        content: '';
+        width: 8px; height: 8px;
+        background: #34c759;
+        border-radius: 50%;
+        box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.2);
+        animation: pulseDot 2s infinite;
+    }
+    @keyframes pulseDot {
+        0%, 100% { box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.2); }
+        50% { box-shadow: 0 0 0 6px rgba(52, 199, 89, 0.05); }
+    }
+
+    .hero h1 {
+        font-family: 'Fraunces', serif;
+        font-size: clamp(44px, 11vw, 112px);
+        font-weight: 600;
+        line-height: 0.98;
+        letter-spacing: -0.04em;
+        color: var(--burgundy-deep);
+        margin-bottom: 24px;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+
+    .hero p {
+        font-size: clamp(16px, 2.2vw, 21px);
+        color: var(--text-muted);
+        max-width: 560px;
+        line-height: 1.5;
+        margin-bottom: 36px;
+        letter-spacing: -0.01em;
+    }
+
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn {
+        padding: 15px 28px;
+        border-radius: 100px;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        min-height: 52px;
+        justify-content: center;
+    }
+    .btn-primary {
+        background: var(--burgundy);
+        color: var(--white);
+        box-shadow: 0 8px 24px rgba(107, 31, 46, 0.28);
+    }
+    .btn-primary:hover, .btn-primary:active {
+        background: var(--burgundy-deep);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 12px 32px rgba(107, 31, 46, 0.4);
+    }
+    .btn-primary:active { transform: translateY(0) scale(0.98); }
+
+    .btn-outline {
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: var(--burgundy);
+        border: 1px solid rgba(107, 31, 46, 0.15);
+    }
+    .btn-outline:hover, .btn-outline:active {
+        background: var(--white);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: var(--shadow-md);
+    }
+
+    /* ============================================================
+       СЕКЦИИ
+    ============================================================ */
+    section {
+        padding: 60px 24px;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .section-label {
+        font-size: 12px;
+        color: var(--accent);
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .section-title {
+        font-family: 'Fraunces', serif;
+        font-size: clamp(32px, 6vw, 56px);
+        font-weight: 600;
+        line-height: 1.05;
+        color: var(--burgundy-deep);
+        letter-spacing: -0.03em;
+        margin-bottom: 36px;
+    }
+
+    /* ABOUT */
+    .about-text {
+        font-size: clamp(17px, 2.3vw, 20px);
+        line-height: 1.6;
+        max-width: 720px;
+        margin-bottom: 32px;
+        letter-spacing: -0.01em;
+        color: #3a2d30;
+    }
+    .about-text strong { color: var(--burgundy); font-weight: 600; }
+
+    .goal-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        padding: 24px 28px;
+        border-radius: var(--r-lg);
+        margin-bottom: 32px;
+        box-shadow: var(--shadow-md);
+        position: relative;
+        overflow: hidden;
+    }
+    .goal-card::before {
+        content: '';
+        position: absolute;
+        left: 0; top: 0; bottom: 0;
+        width: 4px;
+        background: linear-gradient(to bottom, var(--accent), var(--burgundy));
+    }
+    .goal-card h4 {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--accent);
+        margin-bottom: 8px;
+        font-weight: 700;
+    }
+    .goal-card p { font-size: 16px; letter-spacing: -0.01em; }
+
+    .facts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+    }
+    .fact {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        padding: 24px 22px;
+        border-radius: var(--r-lg);
+        box-shadow: var(--shadow-sm);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .fact:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: var(--shadow-lg);
+        background: var(--white);
+    }
+    .fact-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+    .fact p { font-size: 15px; line-height: 1.5; letter-spacing: -0.01em; }
+
+    /* SKILLS */
+    .skills-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 36px;
+    }
+    .level-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--burgundy);
+        color: var(--white);
+        padding: 12px 22px;
+        border-radius: 100px;
+        font-size: 14px;
+        font-weight: 500;
+        box-shadow: 0 10px 30px rgba(107, 31, 46, 0.28);
+        flex-wrap: wrap;
+    }
+    .level-badge strong { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; }
+
+    .skills-list { display: grid; gap: 20px; margin-bottom: 32px; }
+
+    .skill {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        padding: 18px 22px;
+        border-radius: var(--r-md);
+        box-shadow: var(--shadow-sm);
+        display: grid;
+        grid-template-columns: 130px 1fr 50px;
+        align-items: center;
+        gap: 18px;
+    }
+    .skill-name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+
+    .skill-bar {
+        height: 8px;
+        background: rgba(107, 31, 46, 0.08);
+        border-radius: 100px;
+        overflow: hidden;
+    }
+    .skill-fill {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, var(--burgundy), var(--accent));
+        border-radius: 100px;
+        transition: width 1.4s cubic-bezier(0.34, 1.3, 0.64, 1);
+    }
+    .skill-percent {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--burgundy);
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .certs {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        padding: 26px;
+        border-radius: var(--r-lg);
+        box-shadow: var(--shadow-md);
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+    }
+    .certs-icon { font-size: 32px; flex-shrink: 0; }
+    .certs h4 {
+        font-family: 'Fraunces', serif;
+        font-size: 18px;
+        color: var(--burgundy-deep);
+        margin-bottom: 6px;
+        font-weight: 600;
+    }
+    .certs p { font-size: 15px; color: var(--text-muted); }
+    .certs strong { color: var(--burgundy); }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 7px; top: 8px; bottom: 8px;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--burgundy), var(--accent), transparent);
+    }
+    .timeline-item { position: relative; padding-bottom: 32px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -32px; top: 6px;
+        width: 16px; height: 16px;
+        border-radius: 50%;
+        background: var(--cream-2);
+        border: 3px solid var(--burgundy);
+        transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .timeline-item:hover::before {
+        background: var(--accent);
+        border-color: var(--accent);
+        transform: scale(1.25);
+        box-shadow: 0 0 0 6px rgba(196, 30, 58, 0.15);
+    }
+    .timeline-year {
+        font-family: 'Fraunces', serif;
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--burgundy);
+        margin-bottom: 4px;
+        letter-spacing: -0.02em;
+    }
+    .timeline-text { font-size: 15px; color: var(--text-muted); letter-spacing: -0.01em; }
+
+    .timeline-goal {
+        margin-top: 28px;
+        padding: 20px 24px;
+        background: rgba(196, 30, 58, 0.07);
+        border-radius: var(--r-md);
+        font-size: 15px;
+        color: var(--burgundy-deep);
+        line-height: 1.5;
+    }
+    .timeline-goal strong { color: var(--accent); }
+
+    /* HOBBIES */
+    .hobbies-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+        margin-bottom: 32px;
+    }
+    .hobby {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        padding: 22px 16px;
+        border-radius: var(--r-lg);
+        text-align: center;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        cursor: default;
+    }
+    .hobby:hover, .hobby:active {
+        transform: translateY(-4px) scale(1.03);
+        background: var(--burgundy);
+    }
+    .hobby-emoji { font-size: 30px; display: block; margin-bottom: 10px; }
+    .hobby-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text);
+        transition: color 0.3s;
+        letter-spacing: -0.01em;
+    }
+    .hobby:hover .hobby-name { color: var(--white); }
+
+    .media-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+    }
+    .media-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        padding: 22px;
+        border-radius: var(--r-lg);
+        box-shadow: var(--shadow-sm);
+    }
+    .media-card h5 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--accent);
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+    .media-card p {
+        font-family: 'Fraunces', serif;
+        font-size: 18px;
+        color: var(--burgundy-deep);
+        letter-spacing: -0.01em;
+    }
+
+    /* CONTACT */
+    .contact { text-align: center; padding: 60px 24px 80px; }
+    .contact-sub {
+        font-size: 16px;
+        color: var(--text-muted);
+        max-width: 500px;
+        margin: 0 auto 36px;
+        line-height: 1.55;
+    }
+    .contact-links {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .contact-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 16px 28px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        color: var(--burgundy-deep);
+        text-decoration: none;
+        border-radius: 100px;
+        font-weight: 600;
+        font-size: 15px;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        min-height: 54px;
+        letter-spacing: -0.01em;
+    }
+    .contact-btn:hover, .contact-btn:active {
+        background: var(--burgundy);
+        color: var(--white);
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 15px 35px rgba(107, 31, 46, 0.35);
+    }
+
+    footer {
+        text-align: center;
+        padding: 40px 24px calc(40px + var(--nav-h) + var(--safe-bottom));
+        border-top: 1px solid rgba(107, 31, 46, 0.08);
+        font-size: 13px;
+        color: var(--text-muted);
+        letter-spacing: -0.01em;
+    }
+    footer span { color: var(--accent); }
+
+    @media (min-width: 901px) {
+        footer { padding-bottom: 40px; }
+    }
+
+    /* АНИМАЦИИ */
+    .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: opacity, transform;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .progress-bar-top {
+        position: fixed;
+        top: 0; left: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--burgundy), var(--accent));
+        width: 0%;
+        z-index: 200;
+        transition: width 0.1s linear;
+        border-radius: 0 3px 3px 0;
+    }
+
+    /* ============================================================
+       АДАПТИВКА
+    ============================================================ */
+    @media (max-width: 900px) {
+        section { padding: 50px 20px; }
+        .hero { padding: calc(100px + var(--safe-top)) 20px 80px; }
+    }
+
+    @media (max-width: 700px) {
+        .section-title { margin-bottom: 28px; }
+        .about-text { margin-bottom: 28px; }
+        .goal-card { margin-bottom: 28px; padding: 22px 24px; }
+        .skills-header { margin-bottom: 28px; }
+        .skills-list { gap: 16px; margin-bottom: 28px; }
+        .hobbies-grid { grid-template-columns: repeat(2, 1fr); }
+        .contact { padding: 50px 20px 60px; }
+    }
+
+    @media (max-width: 540px) {
+        .skill {
+            grid-template-columns: 1fr auto;
+            grid-template-rows: auto auto;
+            gap: 8px 12px;
+            padding: 16px 18px;
+        }
+        .skill-name { grid-row: 1; grid-column: 1; font-size: 13.5px; }
+        .skill-percent { grid-row: 1; grid-column: 2; font-size: 13px; }
+        .skill-bar { grid-row: 2; grid-column: 1 / -1; }
+
+        .level-badge { font-size: 12.5px; padding: 10px 16px; gap: 6px; }
+        .level-badge strong { font-size: 17px; }
+    }
+
+    @media (max-width: 420px) {
+        .hero h1 { letter-spacing: -0.03em; }
+        .hero-actions { flex-direction: column; }
+        .hero-actions .btn { width: 100%; }
+        .certs { padding: 20px 18px; gap: 12px; flex-direction: column; }
+        .certs-icon { font-size: 28px; }
+        .contact-btn { width: 100%; justify-content: center; }
+        .contact-links { flex-direction: column; }
+        .goal-card { padding: 20px 22px; }
+        .goal-card p { font-size: 15px; }
+
+        .bottom-nav a span { font-size: 9px; }
+        .bottom-nav a svg { width: 20px; height: 20px; }
+
+        .lang-switch-mobile .lang-btn { padding: 7px 9px; min-width: 32px; font-size: 11px; }
+    }
+
+    /* Ландшафт */
+    @media (max-height: 500px) and (orientation: landscape) {
+        .hero { padding: 60px 24px 40px; min-height: auto; }
+        .hero h1 { font-size: 46px; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+        .reveal { opacity: 1; transform: none; }
+    }
+
+    a:focus-visible, button:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+        border-radius: 8px;
+    }
+</style>
+</head>
+<body>
+
+<div class="progress-bar-top" id="progressBar"></div>
+
+<!-- ========== ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ (Mobile) ========== -->
+<div class="lang-switch lang-switch-mobile" id="langSwitchMobile" data-active="ru" role="group" aria-label="Language">
+    <div class="slider"></div>
+    <button class="lang-btn" data-lang="ru">RU</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="ky">KY</button>
+</div>
+
+<!-- ========== ВЕРХНЯЯ НАВИГАЦИЯ (Desktop) ========== -->
+<nav class="desktop-nav" id="desktopNav">
+    <div class="brand">Biloldin<span>.</span></div>
+    <div class="nav-links">
+        <a href="#about" data-i18n="nav_about" data-section="about">Обо мне</a>
+        <a href="#skills" data-i18n="nav_skills" data-section="skills">Навыки</a>
+        <a href="#journey" data-i18n="nav_journey" data-section="journey">Путь</a>
+        <a href="#hobbies" data-i18n="nav_hobbies" data-section="hobbies">Увлечения</a>
+        <a href="#contact" data-i18n="nav_contact" data-section="contact">Контакты</a>
+    </div>
+    <div class="lang-switch" id="langSwitchDesktop" data-active="ru" role="group" aria-label="Language">
+        <div class="slider"></div>
+        <button class="lang-btn" data-lang="ru">RU</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ky">KY</button>
+    </div>
+</nav>
+
+<!-- ========== BOTTOM TAB BAR (Mobile) ========== -->
+<nav class="bottom-nav" id="bottomNav">
+    <a href="#top" data-section="top" class="active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/>
+        </svg>
+        <span data-i18n="tab_home">Главная</span>
+    </a>
+    <a href="#about" data-section="about">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+        </svg>
+        <span data-i18n="tab_about">Обо мне</span>
+    </a>
+    <a href="#skills" data-section="skills">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 20V10M12 20V4M18 20v-7"/>
+        </svg>
+        <span data-i18n="tab_skills">Навыки</span>
+    </a>
+    <a href="#journey" data-section="journey">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="6" cy="6" r="2"/>
+            <circle cx="18" cy="18" r="2"/>
+            <path d="M8 6h8a4 4 0 014 4v0a4 4 0 01-4 4h-4a4 4 0 00-4 4v0"/>
+        </svg>
+        <span data-i18n="tab_journey">Путь</span>
+    </a>
+    <a href="#contact" data-section="contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+        </svg>
+        <span data-i18n="tab_contact">Контакты</span>
+    </a>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="top">
+    <div class="hero-content">
+        <div class="hero-tag reveal" data-i18n="hero_tag">English Portfolio · B2 Level</div>
+        <h1 class="reveal">
+            Biloldin —<br>
+            <span data-i18n="hero_h1_a">learning</span> <em data-i18n="hero_h1_b">English</em><br>
+            <span data-i18n="hero_h1_c">for the future.</span>
+        </h1>
+        <p class="reveal" data-i18n="hero_slogan">Learning English today to build my future tomorrow.</p>
+        <div class="hero-actions reveal">
+            <a href="#contact" class="btn btn-primary" data-i18n="hero_btn1">Связаться со мной →</a>
+            <a href="#about" class="btn btn-outline" data-i18n="hero_btn2">Узнать больше</a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section id="about">
+    <div class="section-label reveal" data-i18n="about_label">About me</div>
+    <h2 class="section-title reveal" data-i18n="about_title">Немного обо мне</h2>
+
+    <p class="about-text reveal" data-i18n="about_text">
+        Я изучаю английский язык, потому что хочу <strong>свободно общаться с людьми со всего мира</strong> и использовать английский для своего образования и будущей карьеры.
+    </p>
+
+    <div class="goal-card reveal">
+        <h4 data-i18n="about_goal_label">Моя цель</h4>
+        <p data-i18n="about_goal_text">Поступить в зарубежный университет и использовать английский для учёбы, общения и будущей работы.</p>
+    </div>
+
+    <div class="facts-grid">
+        <div class="fact reveal">
+            <span class="fact-icon">🌎</span>
+            <p data-i18n="fact1">Мечтаю учиться за границей и открывать новые культуры</p>
+        </div>
+        <div class="fact reveal">
+            <span class="fact-icon">💻</span>
+            <p data-i18n="fact2">Интересуюсь технологиями и кибербезопасностью</p>
+        </div>
+        <div class="fact reveal">
+            <span class="fact-icon">📚</span>
+            <p data-i18n="fact3">Постоянно работаю над английским и стремлюсь к высокому уровню</p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== SKILLS ========== -->
+<section id="skills">
+    <div class="section-label reveal" data-i18n="skills_label">Skills</div>
+    <div class="skills-header">
+        <h2 class="section-title reveal" style="margin-bottom: 0;" data-i18n="skills_title">Мой английский</h2>
+        <div class="level-badge reveal">
+            <span data-i18n="skills_level">Уровень:</span>
+            <strong>B2</strong>
+            <span data-i18n="skills_level2">Upper-Intermediate</span>
+        </div>
+    </div>
+
+    <div class="skills-list">
+        <div class="skill reveal">
+            <div class="skill-name" data-i18n="skill_reading">📖 Чтение</div>
+            <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+            <div class="skill-percent">80%</div>
+        </div>
+        <div class="skill reveal">
+            <div class="skill-name" data-i18n="skill_listening">🎧 Аудирование</div>
+            <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+            <div class="skill-percent">80%</div>
+        </div>
+        <div class="skill reveal">
+            <div class="skill-name" data-i18n="skill_speaking">🗣️ Говорение</div>
+            <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+            <div class="skill-percent">65%</div>
+        </div>
+        <div class="skill reveal">
+            <div class="skill-name" data-i18n="skill_writing">✍️ Письмо</div>
+            <div class="skill-bar"><div class="skill-fill" data-width="60"></div></div>
+            <div class="skill-percent">60%</div>
+        </div>
+        <div class="skill reveal">
+            <div class="skill-name" data-i18n="skill_grammar">📚 Грамматика</div>
+            <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+            <div class="skill-percent">75%</div>
+        </div>
+    </div>
+
+    <div class="certs reveal">
+        <div class="certs-icon">🎓</div>
+        <div>
+            <h4 data-i18n="certs_title">Сертификаты и курсы</h4>
+            <p data-i18n="certs_text">Закончил курс Upper-Intermediate в <strong>K-Land English Center</strong>.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== TIMELINE ========== -->
+<section id="journey">
+    <div class="section-label reveal" data-i18n="journey_label">My journey</div>
+    <h2 class="section-title reveal" data-i18n="journey_title">Путь в английском</h2>
+
+    <div class="timeline">
+        <div class="timeline-item reveal">
+            <div class="timeline-year">2022</div>
+            <div class="timeline-text" data-i18n="j2022">Начал более серьёзно изучать английский язык</div>
+        </div>
+        <div class="timeline-item reveal">
+            <div class="timeline-year">2023</div>
+            <div class="timeline-text" data-i18n="j2023">Продолжил изучение грамматики и расширял словарный запас</div>
+        </div>
+        <div class="timeline-item reveal">
+            <div class="timeline-year">2024</div>
+            <div class="timeline-text" data-i18n="j2024">Стал больше практиковать через видео, фильмы и другие материалы</div>
+        </div>
+        <div class="timeline-item reveal">
+            <div class="timeline-year">2025</div>
+            <div class="timeline-text" data-i18n="j2025">Начал уделять больше внимания Speaking, Listening и академическому английскому</div>
+        </div>
+        <div class="timeline-item reveal">
+            <div class="timeline-year">2026</div>
+            <div class="timeline-text" data-i18n="j2026">Закончил Upper-Intermediate в K-Land English Center</div>
+        </div>
+    </div>
+
+    <div class="timeline-goal reveal" data-i18n="journey_goal">
+        <strong>Следующая цель:</strong> достичь уверенного продвинутого уровня английского и использовать язык для поступления в зарубежный университет.
+    </div>
+</section>
+
+<!-- ========== HOBBIES ========== -->
+<section id="hobbies">
+    <div class="section-label reveal" data-i18n="hobbies_label">Hobbies</div>
+    <h2 class="section-title reveal" data-i18n="hobbies_title">Что мне нравится</h2>
+
+    <div class="hobbies-grid">
+        <div class="hobby reveal"><span class="hobby-emoji">💻</span><div class="hobby-name" data-i18n="hobby1">Технологии</div></div>
+        <div class="hobby reveal"><span class="hobby-emoji">🎮</span><div class="hobby-name" data-i18n="hobby2">Игры</div></div>
+        <div class="hobby reveal"><span class="hobby-emoji">🎬</span><div class="hobby-name" data-i18n="hobby3">Фильмы и сериалы</div></div>
+        <div class="hobby reveal"><span class="hobby-emoji">🏃</span><div class="hobby-name" data-i18n="hobby4">Спорт</div></div>
+        <div class="hobby reveal"><span class="hobby-emoji">🌎</span><div class="hobby-name" data-i18n="hobby5">Языки и культуры</div></div>
+    </div>
+
+    <div class="media-cards">
+        <div class="media-card reveal">
+            <h5 data-i18n="media1_label">🎬 Что смотрю</h5>
+            <p data-i18n="media1_text">Азиатские дорамы в оригинале</p>
+        </div>
+        <div class="media-card reveal">
+            <h5 data-i18n="media2_label">🎵 Что слушаю</h5>
+            <p>boa</p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section id="contact" class="contact">
+    <div class="section-label reveal" data-i18n="contact_label">Contact</div>
+    <h2 class="section-title reveal" data-i18n="contact_title">Давай общаться</h2>
+    <p class="contact-sub reveal" data-i18n="contact_sub">Открыт к общению, новым знакомствам и совместной практике английского!</p>
+
+    <div class="contact-links reveal">
+        <a href="https://www.instagram.com/rahmonberdiev_09/" class="contact-btn" target="_blank" rel="noopener">
+            <span>📷</span> Instagram
+        </a>
+    </div>
+</section>
+
+<footer data-i18n="footer">
+    Designed & built with <span>♥</span> · Biloldin · 2026
+</footer>
+
+<script>
+    /* ============================================================
+       СЛОВАРЬ ПЕРЕВОДОВ
+    ============================================================ */
+    const translations = {
+        ru: {
+            nav_about: "Обо мне", nav_skills: "Навыки", nav_journey: "Путь",
+            nav_hobbies: "Увлечения", nav_contact: "Контакты",
+            tab_home: "Главная", tab_about: "Обо мне", tab_skills: "Навыки",
+            tab_journey: "Путь", tab_contact: "Контакты",
+
+            hero_tag: "English Portfolio · Уровень B2",
+            hero_h1_a: "учу", hero_h1_b: "английский", hero_h1_c: "для будущего.",
+            hero_slogan: "Учу английский сегодня, чтобы построить своё будущее завтра.",
+            hero_btn1: "Связаться со мной →", hero_btn2: "Узнать больше",
+
+            about_label: "Обо мне",
+            about_title: "Немного обо мне",
+            about_text: "Я изучаю английский язык, потому что хочу <strong>свободно общаться с людьми со всего мира</strong> и использовать английский для своего образования и будущей карьеры. Сейчас я активно развиваю свои языковые навыки и стараюсь практиковать английский как можно чаще.",
+            about_goal_label: "Моя цель",
+            about_goal_text: "Поступить в зарубежный университет и использовать английский для учёбы, общения и будущей работы.",
+            fact1: "Мечтаю учиться за границей и открывать новые культуры",
+            fact2: "Интересуюсь технологиями и кибербезопасностью",
+            fact3: "Постоянно работаю над английским и стремлюсь к высокому уровню",
+
+            skills_label: "Навыки",
+            skills_title: "Мой английский",
+            skills_level: "Уровень:", skills_level2: "Upper-Intermediate",
+            skill_reading: "📖 Чтение", skill_listening: "🎧 Аудирование",
+            skill_speaking: "🗣️ Говорение", skill_writing: "✍️ Письмо",
+            skill_grammar: "📚 Грамматика",
+            certs_title: "Сертификаты и курсы",
+            certs_text: "Закончил курс Upper-Intermediate в <strong>K-Land English Center</strong>. Самостоятельно готовлюсь к международным экзаменам по английскому языку.",
+
+            journey_label: "Мой путь",
+            journey_title: "Путь в английском",
+            j2022: "Начал более серьёзно изучать английский язык",
+            j2023: "Продолжил изучение грамматики и расширял словарный запас",
+            j2024: "Стал больше практиковать английский через видео, фильмы и другие материалы",
+            j2025: "Начал уделять больше внимания Speaking, Listening и академическому английскому",
+            j2026: "Закончил Upper-Intermediate в K-Land English Center",
+            journey_goal: "<strong>Следующая цель:</strong> достичь уверенного продвинутого уровня английского и использовать язык для поступления в зарубежный университет.",
+
+            hobbies_label: "Увлечения",
+            hobbies_title: "Что мне нравится",
+            hobby1: "Технологии", hobby2: "Игры", hobby3: "Фильмы и сериалы",
+            hobby4: "Спорт", hobby5: "Языки и культуры",
+            media1_label: "🎬 Что смотрю", media1_text: "Азиатские дорамы в оригинале",
+            media2_label: "🎵 Что слушаю",
+
+            contact_label: "Контакты",
+            contact_title: "Давай общаться",
+            contact_sub: "Открыт к общению, новым знакомствам и совместной практике английского. Пиши в любой удобной соцсети!",
+            footer: 'Сделано с <span>♥</span> · Biloldin · 2026'
+        },
+
+        en: {
+            nav_about: "About", nav_skills: "Skills", nav_journey: "Journey",
+            nav_hobbies: "Hobbies", nav_contact: "Contact",
+            tab_home: "Home", tab_about: "About", tab_skills: "Skills",
+            tab_journey: "Journey", tab_contact: "Contact",
+
+            hero_tag: "English Portfolio · B2 Level",
+            hero_h1_a: "learning", hero_h1_b: "English", hero_h1_c: "for the future.",
+            hero_slogan: "Learning English today to build my future tomorrow.",
+            hero_btn1: "Get in touch →", hero_btn2: "Learn more",
+
+            about_label: "About me",
+            about_title: "A little about me",
+            about_text: "I'm learning English because I want to <strong>communicate freely with people from all over the world</strong> and use English for my education and future career. Right now I'm actively developing my language skills and try to practice as often as I can.",
+            about_goal_label: "My goal",
+            about_goal_text: "To get into a foreign university and use English for study, communication and future work.",
+            fact1: "Dreaming of studying abroad and discovering new cultures",
+            fact2: "Passionate about technology and cybersecurity",
+            fact3: "Constantly working on my English and aiming for a high level",
+
+            skills_label: "Skills",
+            skills_title: "My English",
+            skills_level: "Level:", skills_level2: "Upper-Intermediate",
+            skill_reading: "📖 Reading", skill_listening: "🎧 Listening",
+            skill_speaking: "🗣️ Speaking", skill_writing: "✍️ Writing",
+            skill_grammar: "📚 Grammar",
+            certs_title: "Certificates & Courses",
+            certs_text: "Completed the Upper-Intermediate course at <strong>K-Land English Center</strong>. Currently preparing for international English exams on my own.",
+
+            journey_label: "My journey",
+            journey_title: "My English journey",
+            j2022: "Started learning English more seriously",
+            j2023: "Continued studying grammar and expanding my vocabulary",
+            j2024: "Started practicing more through videos, films and other materials",
+            j2025: "Focused more on Speaking, Listening and academic English",
+            j2026: "Completed Upper-Intermediate at K-Land English Center",
+            journey_goal: "<strong>Next goal:</strong> reach a confident advanced level and use English to apply to a foreign university.",
+
+            hobbies_label: "Hobbies",
+            hobbies_title: "Things I enjoy",
+            hobby1: "Technology", hobby2: "Gaming", hobby3: "Movies & Series",
+            hobby4: "Sports", hobby5: "Languages & Cultures",
+            media1_label: "🎬 What I watch", media1_text: "Asian dramas in the original",
+            media2_label: "🎵 What I listen to",
+
+            contact_label: "Contact",
+            contact_title: "Let's talk",
+            contact_sub: "Open to communication, new connections and practicing English together. Reach out on any social media!",
+            footer: 'Designed with <span>♥</span> · Biloldin · 2026'
+        },
+
+        ky: {
+            nav_about: "Мен жөнүндө", nav_skills: "Көндүмдөр", nav_journey: "Жолум",
+            nav_hobbies: "Хобби", nav_contact: "Байланыш",
+            tab_home: "Башкы", tab_about: "Мен жөнүндө", tab_skills: "Көндүмдөр",
+            tab_journey: "Жолум", tab_contact: "Байланыш",
+
+            hero_tag: "English Portfolio · B2 деңгээл",
+            hero_h1_a: "келечек үчүн", hero_h1_b: "англис тилин", hero_h1_c: "үйрөнүп жатам.",
+            hero_slogan: "Бүгүн англис тилин үйрөнүп, эртең келечегимди курам.",
+            hero_btn1: "Байланышуу →", hero_btn2: "Кененирээк",
+
+            about_label: "Мен жөнүндө",
+            about_title: "Өзүм жөнүндө аз-аздан",
+            about_text: "Мен англис тилин <strong>дүйнөнүн бардык бурчунан келген адамдар менен эркин баарлашуу</strong> үчүн жана билим алуу менен келечектеги карьерам үчүн үйрөнүп жатам. Азыр тил көндүмдөрүмдү активдүү өнүктүрүп, англис тилин мүмкүн болушунча көп практикалоого аракет кылып жатам.",
+            about_goal_label: "Менин максатым",
+            about_goal_text: "Чет өлкөлүк университетке кирип, англис тилин окуу, баарлашуу жана келечектеги жумуш үчүн колдонуу.",
+            fact1: "Чет өлкөдө окууну жана жаңы маданияттарды ачууну кыялданам",
+            fact2: "Технологиялар жана киберкоопсуздук менен кызыгам",
+            fact3: "Англис тилимдин үстүндө тынымсыз иштеп, жогорку деңгээлге жетүүгө умтулам",
+
+            skills_label: "Көндүмдөр",
+            skills_title: "Менин англис тилим",
+            skills_level: "Деңгээл:", skills_level2: "Upper-Intermediate",
+            skill_reading: "📖 Окуу", skill_listening: "🎧 Угуу",
+            skill_speaking: "🗣️ Сүйлөө", skill_writing: "✍️ Жазуу",
+            skill_grammar: "📚 Грамматика",
+            certs_title: "Сертификаттар жана курстар",
+            certs_text: "K-Land English Centerде Upper-Intermediate курсун аяктадым. Эл аралык англис тили экзамендерине өз алдымча даярданып жатам.",
+
+            journey_label: "Менин жолум",
+            journey_title: "Англис тилиндеги жолум",
+            j2022: "Англис тилин олуттуураак үйрөнө баштадым",
+            j2023: "Грамматиканы үйрөнүүнү улантып, сөз байлыгымды кеңейттим",
+            j2024: "Видеолор, тасмалар жана башка материалдар аркылуу көбүрөөк практикалай баштадым",
+            j2025: "Speaking, Listening жана академиялык англис тилине көбүрөөк көңүл бура баштадым",
+            j2026: "K-Land English Centerде Upper-Intermediate аяктадым",
+            journey_goal: "<strong>Кийинки максат:</strong> англис тилинин ишенимдүү жогорку деңгээлине жетип, чет өлкөлүк университетке тапшыруу үчүн тилди колдонуу.",
+
+            hobbies_label: "Хобби",
+            hobbies_title: "Мага эмне жагат",
+            hobby1: "Технологиялар", hobby2: "Оюндар", hobby3: "Тасмалар жана сериалдар",
+            hobby4: "Спорт", hobby5: "Тилдер жана маданияттар",
+            media1_label: "🎬 Эмне көрөм", media1_text: "Азиялык дорамаларды түпнускада",
+            media2_label: "🎵 Эмне угам",
+
+            contact_label: "Байланыш",
+            contact_title: "Баарлашалы",
+            contact_sub: "Байланышууга, жаңы таанышууларга жана биргелешип англис тилин практикалоого ачыкмын. Каалаган социалдык тармакка жазыңыз!",
+            footer: 'Дизайн <span>♥</span> менен · Biloldin · 2026'
+        }
+    };
+
+    /* ============================================================
+       ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ (оба — desktop + mobile)
+    ============================================================ */
+    const langSwitchDesktop = document.getElementById('langSwitchDesktop');
+    const langSwitchMobile = document.getElementById('langSwitchMobile');
+    let currentLang = localStorage.getItem('portfolio_lang') || 'ru';
+    if (!translations[currentLang]) currentLang = 'ru';
+
+    function applyLanguage(lang) {
+        if (!translations[lang]) return;
+        currentLang = lang;
+        localStorage.setItem('portfolio_lang', lang);
+        document.documentElement.lang = lang;
+
+        // Обновляем ОБА переключателя
+        if (langSwitchDesktop) langSwitchDesktop.setAttribute('data-active', lang);
+        if (langSwitchMobile) langSwitchMobile.setAttribute('data-active', lang);
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            const t = translations[lang][key];
+            if (t === undefined) return;
+            if (t.includes('<')) el.innerHTML = t;
+            else el.textContent = t;
+        });
+    }
+
+    // Обработчик для ВСЕХ кнопок языков (desktop + mobile)
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+    });
+
+    applyLanguage(currentLang);
+
+    /* ============================================================
+       СКРОЛЛ + АКТИВНАЯ СЕКЦИЯ
+    ============================================================ */
+    const progressBar = document.getElementById('progressBar');
+    const bottomNavLinks = document.querySelectorAll('.bottom-nav a');
+    const desktopNavLinks = document.querySelectorAll('.desktop-nav .nav-links a');
+    const sections = document.querySelectorAll('section[id]');
+
+    let ticking = false;
+    function onScroll() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight > 0) {
+            progressBar.style.width = ((scrollTop / docHeight) * 100) + '%';
+        }
+
+        let current = 'top';
+        const offset = 140;
+        sections.forEach(sec => {
+            if (scrollTop >= sec.offsetTop - offset) current = sec.id;
+        });
+
+        bottomNavLinks.forEach(link => {
+            link.classList.toggle('active', link.dataset.section === current);
+        });
+        desktopNavLinks.forEach(link => {
+            link.classList.toggle('active', link.dataset.section === current);
+        });
+
+        ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(onScroll);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    /* ============================================================
+       REVEAL АНИМАЦИИ
+    ============================================================ */
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), index * 60);
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    /* ============================================================
+       ПРОГРЕСС-БАРЫ НАВЫКОВ
+    ============================================================ */
+    const skillFills = document.querySelectorAll('.skill-fill');
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                const w = target.getAttribute('data-width');
+                setTimeout(() => target.style.width = w + '%', 200);
+                skillObserver.unobserve(target);
+            }
+        });
+    }, { threshold: 0.5 });
+    skillFills.forEach(fill => skillObserver.observe(fill));
+
+    /* ============================================================
+       ПЛАВНЫЙ СКРОЛЛ
+    ============================================================ */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#' || href === '') return;
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
